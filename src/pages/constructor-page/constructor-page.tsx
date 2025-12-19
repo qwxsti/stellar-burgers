@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from '../../services/store';
-import { getIngredients } from '../../services/ingredientsSlice';
+import { getIngredients } from '../../services/slices/ingredientsSlice';
 
 import styles from './constructor-page.module.css';
 

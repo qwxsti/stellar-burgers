@@ -6,11 +6,13 @@ import {
   useSelector as selectorHook
 } from 'react-redux';
 
-import { ingredientsReducer } from './ingredientsSlice';
+import { ingredientsReducer } from './slices/ingredientsSlice';
+import { constructorReducer } from './slices/constructorSlice';
 
 const store = configureStore({
   reducer: {
-    ingredients: ingredientsReducer
+    ingredients: ingredientsReducer,
+    constructor: constructorReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });
