@@ -8,11 +8,13 @@ import {
 
 import { ingredientsReducer } from './slices/ingredientsSlice';
 import { constructorReducer } from './slices/constructorSlice';
+import { orderReducer } from './slices/orderSlice';
 
 const store = configureStore({
   reducer: {
     ingredients: ingredientsReducer,
-    constructor: constructorReducer
+    burgerConstructor: constructorReducer,
+    order: orderReducer
   },
   devTools: process.env.NODE_ENV !== 'production'
 });
