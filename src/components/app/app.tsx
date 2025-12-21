@@ -45,7 +45,14 @@ const App = () => {
       <Routes location={background || location}>
         <Route path='/ingredients/:number' element={<IngredientDetails />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
-        <Route path='/profile/orders/:number' element={<OrderInfo />} />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute>
+              <OrderInfo />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/'>
           <Route index element={<ConstructorPage />} />
           <Route path='feed' element={<Feed />} />
