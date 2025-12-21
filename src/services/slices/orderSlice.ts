@@ -1,6 +1,7 @@
-import { orderBurgerApi } from '@api';
+import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { TOrder } from '@utils-types';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { create } from 'domain';
 
 interface orderState {
   orderRequest: boolean;
@@ -19,6 +20,20 @@ export const placeOrder = createAsyncThunk(
   async (data: string[]) => {
     const response = await orderBurgerApi(data);
     return response.order;
+  }
+);
+
+export const getOrderByNumber = createAsyncThunk(
+  'api/orderByNumber',
+  async (number: number, { rejectWithValue }) => {
+    try {
+      const response = await getOrderByNumberApi(number);
+      return response.orders;
+    } catch (error) {
+      return rejectWithValue(
+        'Произошла ошибка при загрузке заказа по номеру: ' + error
+      );
+    }
   }
 );
 
@@ -48,6 +63,19 @@ const orderSlice = createSlice({
         state.error =
           (action.payload as string) ||
           'Произошла ошибка при оформлении заказа';
+      })
+      .addCase(getOrderByNumber.fulfilled, (state, action) => {
+        state.orderModalData = action.payload[0];
+        state.orderRequest = false;
+      })
+      .addCase(getOrderByNumber.rejected, (state, action) => {
+        state.error =
+          (action.payload as string) || 'Произошла ошибка при загрузке заказа';
+        state.orderRequest = false;
+      })
+      .addCase(getOrderByNumber.pending, (state) => {
+        state.orderRequest = true;
+        state.error = null;
       });
   }
 });

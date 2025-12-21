@@ -5,26 +5,28 @@ import {
   logoutApi,
   updateUserApi,
   TRegisterData,
-  TLoginData
+  TLoginData,
+  getOrdersApi
 } from '@api';
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { TUser } from '@utils-types';
-import { log } from 'console';
-import { setCookie, getCookie, deleteCookie } from '../../utils/cookie';
+import { TOrder, TUser } from '@utils-types';
+import { setCookie, deleteCookie } from '../../utils/cookie';
 
 interface userState {
   isAuthChecked: boolean;
   isAuthenticated: boolean;
   user: TUser | null;
   error: string | null;
+  orders: TOrder[];
 }
 
 const initialState: userState = {
   isAuthChecked: false,
   isAuthenticated: false,
   user: null,
-  error: null
+  error: null,
+  orders: []
 };
 
 export const registerUser = createAsyncThunk(
@@ -121,6 +123,20 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+export const getUserOrders = createAsyncThunk(
+  'api/getUserOrders',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getOrdersApi();
+      return response;
+    } catch (error) {
+      return rejectWithValue(
+        'Произошла ошибка при получении заказов пользователя: ' + error
+      );
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -188,6 +204,15 @@ const userSlice = createSlice({
         state.error =
           (action.payload as string) ||
           'Произошла ошибка при выходе пользователя';
+      })
+      .addCase(getUserOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+        state.error = null;
+      })
+      .addCase(getUserOrders.rejected, (state, action) => {
+        state.error =
+          (action.payload as string) ||
+          'Произошла ошибка при получении заказов пользователя';
       });
   }
 });
