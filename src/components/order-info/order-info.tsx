@@ -14,8 +14,8 @@ export const OrderInfo: FC = () => {
     (state) =>
       state.feed.orders.find((order) => order.number === Number(number)) ||
       state.user.orders.find((order) => order.number === Number(number)) ||
-      (state.order.orderModalData?.number === Number(number)
-        ? state.order.orderModalData
+      (state.order.orderByNumber?.number === Number(number)
+        ? state.order.orderByNumber
         : null)
   );
 

@@ -1,5 +1,6 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
+import { placeOrder } from './orderSlice';
 
 interface constructorState {
   bun: TIngredient | null;
@@ -44,6 +45,12 @@ const constructorSlice = createSlice({
       ingredients.splice(to, 0, ingredients.splice(from, 1)[0]);
       state.ingredients = ingredients;
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(placeOrder.fulfilled, (state, action) => {
+      state.bun = null;
+      state.ingredients = [];
+    });
   }
 });
 

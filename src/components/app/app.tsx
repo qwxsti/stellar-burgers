@@ -34,6 +34,8 @@ const App = () => {
 
   const background = action === 'PUSH' ? location.state?.background : null;
 
+  const handleModalClose = () => navigate(-1);
+
   useEffect(() => {
     dispatch(getUser());
     dispatch(getIngredients());
@@ -115,12 +117,7 @@ const App = () => {
           <Route
             path='/ingredients/:number'
             element={
-              <Modal
-                title='Детали ингредиента'
-                onClose={() => {
-                  navigate(-1);
-                }}
-              >
+              <Modal title='Детали ингредиента' onClose={handleModalClose}>
                 <IngredientDetails />
               </Modal>
             }
@@ -128,12 +125,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal
-                title='Детали заказа'
-                onClose={() => {
-                  navigate(-1);
-                }}
-              >
+              <Modal title='Детали заказа' onClose={handleModalClose}>
                 <OrderInfo />
               </Modal>
             }
@@ -141,12 +133,7 @@ const App = () => {
           <Route
             path='/profile/orders/:number'
             element={
-              <Modal
-                title='Детали заказа'
-                onClose={() => {
-                  navigate(-1);
-                }}
-              >
+              <Modal title='Детали заказа' onClose={handleModalClose}>
                 <OrderInfo />
               </Modal>
             }

@@ -1,17 +1,18 @@
 import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { TOrder } from '@utils-types';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { create } from 'domain';
 
 interface orderState {
   orderRequest: boolean;
   orderModalData: TOrder | null;
+  orderByNumber: TOrder | null;
   error: string | null;
 }
 
 const initialState: orderState = {
   orderRequest: false,
   orderModalData: null,
+  orderByNumber: null,
   error: null
 };
 
@@ -65,7 +66,7 @@ const orderSlice = createSlice({
           'Произошла ошибка при оформлении заказа';
       })
       .addCase(getOrderByNumber.fulfilled, (state, action) => {
-        state.orderModalData = action.payload[0];
+        state.orderByNumber = action.payload[0];
         state.orderRequest = false;
       })
       .addCase(getOrderByNumber.rejected, (state, action) => {
