@@ -35,9 +35,9 @@ const App = () => {
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
-        <Route path='/feed/:id' element={<OrderInfo />} />
-        <Route path='/profile/orders/:id' element={<OrderInfo />} />
+        <Route path='/ingredients/:number' element={<IngredientDetails />} />
+        <Route path='/feed/:number' element={<OrderInfo />} />
+        <Route path='/profile/orders/:number' element={<OrderInfo />} />
         <Route path='/'>
           <Route index element={<ConstructorPage />} />
           <Route path='feed' element={<Feed />} />
@@ -98,7 +98,7 @@ const App = () => {
       {background && (
         <Routes>
           <Route
-            path='/ingredients/:id'
+            path='/ingredients/:number'
             element={
               <Modal
                 title='Детали ингредиента'
@@ -111,7 +111,7 @@ const App = () => {
             }
           />
           <Route
-            path='/feed/:id'
+            path='/feed/:number'
             element={
               <Modal
                 title='Детали заказа'
@@ -124,7 +124,7 @@ const App = () => {
             }
           />
           <Route
-            path='/profile/orders/:id'
+            path='/profile/orders/:number'
             element={
               <Modal
                 title='Детали заказа'
