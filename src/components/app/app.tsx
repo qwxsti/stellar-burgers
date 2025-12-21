@@ -13,7 +13,13 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  useNavigationType
+} from 'react-router-dom';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getUser } from '../../services/slices/userSlice';
@@ -23,8 +29,10 @@ import { getIngredients } from '../../services/slices/ingredientsSlice';
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const background = location.state && location.state.background;
   const dispatch = useDispatch();
+  const action = useNavigationType();
+
+  const background = action === 'PUSH' ? location.state?.background : null;
 
   useEffect(() => {
     dispatch(getUser());
