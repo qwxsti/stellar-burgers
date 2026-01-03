@@ -19,7 +19,6 @@ export const getIngredients = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const data = await getIngredientsApi();
-      console.log(data);
       return data;
     } catch (error) {
       return rejectWithValue(

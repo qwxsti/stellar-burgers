@@ -20,7 +20,6 @@ export const placeOrder = createAsyncThunk(
   'api/order',
   async (data: string[]) => {
     const response = await orderBurgerApi(data);
-    console.log(response);
     return response.order;
   }
 );
