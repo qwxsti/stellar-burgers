@@ -2,14 +2,14 @@ import { getOrderByNumberApi, orderBurgerApi } from '@api';
 import { TOrder } from '@utils-types';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-interface orderState {
+export interface OrderState {
   orderRequest: boolean;
   orderModalData: TOrder | null;
   orderByNumber: TOrder | null;
   error: string | null;
 }
 
-const initialState: orderState = {
+export const initialState: OrderState = {
   orderRequest: false,
   orderModalData: null,
   orderByNumber: null,
@@ -32,7 +32,7 @@ export const getOrderByNumber = createAsyncThunk(
       return response.orders;
     } catch (error) {
       return rejectWithValue(
-        'Произошла ошибка при загрузке заказа по номеру: ' + error
+        'Произошла ошибка при загрузке заказа по номеру: ' /*+ error*/
       );
     }
   }

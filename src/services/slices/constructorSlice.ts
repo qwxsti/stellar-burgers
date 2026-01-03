@@ -2,12 +2,12 @@ import { createSlice, nanoid } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 import { placeOrder } from './orderSlice';
 
-interface constructorState {
+export interface constructorState {
   bun: TIngredient | null;
   ingredients: TConstructorIngredient[];
 }
 
-const initialState: constructorState = {
+export const initialState: constructorState = {
   bun: null,
   ingredients: []
 };

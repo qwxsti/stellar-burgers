@@ -2,13 +2,13 @@ import { getIngredientsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
 
-interface ingredientsState {
+export interface ingredientsState {
   ingredients: TIngredient[];
   isLoading: boolean;
   error: string | null;
 }
 
-const initialState: ingredientsState = {
+export const initialState: ingredientsState = {
   ingredients: [],
   isLoading: true,
   error: null
@@ -22,7 +22,7 @@ export const getIngredients = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(
-        'Произошла ошибка при загрузке ингредиентов:' + error
+        'Произошла ошибка при загрузке ингредиентов:' /*+ error*/
       );
     }
   }
