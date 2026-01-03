@@ -1,7 +1,7 @@
 import {
   ingredientsReducer,
   getIngredients,
-  ingredientsState
+  initialState
 } from '../slices/ingredientsSlice';
 
 const mockIngredients = [
@@ -50,12 +50,6 @@ const mockIngredients = [
 ];
 
 describe('Ingredients Slice', () => {
-  const initialState: ingredientsState = {
-    ingredients: [],
-    isLoading: true,
-    error: null
-  };
-
   test('Changing status to loading while pending', () => {
     const action = { type: getIngredients.pending.type };
     const newState = ingredientsReducer(initialState, action);

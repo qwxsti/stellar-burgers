@@ -10,7 +10,7 @@ export interface feedState {
   totalToday: number;
 }
 
-const initialState: feedState = {
+export const initialState: feedState = {
   orders: [],
   isLoading: true,
   error: null,

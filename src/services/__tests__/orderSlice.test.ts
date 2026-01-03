@@ -2,7 +2,8 @@ import {
   orderReducer,
   placeOrder,
   getOrderByNumber,
-  OrderState
+  OrderState,
+  initialState
 } from '../slices/orderSlice';
 
 const mockIngredients = [
@@ -63,13 +64,6 @@ const mockOrder = {
 const mockPayload = { orders: [mockOrder] };
 
 describe('Order Slice (getting order by number)', () => {
-  const initialState: OrderState = {
-    orderRequest: false,
-    orderModalData: null,
-    orderByNumber: null,
-    error: null
-  };
-
   test('Changing status to loading while pending', () => {
     const action = { type: getOrderByNumber.pending.type };
     const newState = orderReducer(initialState, action);

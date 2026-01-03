@@ -3,7 +3,8 @@ import {
   addIngredient,
   removeIngredient,
   moveIngredient,
-  constructorState
+  constructorState,
+  initialState
 } from '../slices/constructorSlice';
 
 const mockBun = {
@@ -32,11 +33,6 @@ const mockIngredient = {
   image: 'img-link',
   image_large: 'img-link',
   image_mobile: 'img-link'
-};
-
-const initialState: constructorState = {
-  bun: null,
-  ingredients: []
 };
 
 const toDeleteState: constructorState = {

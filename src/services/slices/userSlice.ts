@@ -23,7 +23,7 @@ export interface userState {
   orders: TOrder[];
 }
 
-const initialState: userState = {
+export const initialState: userState = {
   isAuthChecked: false,
   isAuthenticated: false,
   user: null,

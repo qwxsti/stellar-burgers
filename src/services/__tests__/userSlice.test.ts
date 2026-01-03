@@ -8,7 +8,7 @@ import {
   getUserOrders,
   forgotPassword,
   resetPassword,
-  userState
+  initialState
 } from '../slices/userSlice';
 import { TUser, TOrder } from '@utils-types';
 
@@ -28,14 +28,6 @@ const mockOrders: TOrder[] = [
     ingredients: ['9yh80w4erhu9sdf', 'ioshbdfuw9e8hur']
   }
 ];
-
-const initialState: userState = {
-  isAuthChecked: false,
-  isAuthenticated: false,
-  user: null,
-  error: null,
-  orders: []
-};
 
 describe('User Slice (register)', () => {
   test('write data when fulfilled', () => {

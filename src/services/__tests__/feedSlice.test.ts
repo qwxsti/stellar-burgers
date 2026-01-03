@@ -1,4 +1,4 @@
-import { feedReducer, getFeed, feedState } from '../slices/feedSlice';
+import { feedReducer, getFeed, initialState } from '../slices/feedSlice';
 
 const mockIngredients = [
   {
@@ -74,14 +74,6 @@ const mockPayload = {
 };
 
 describe('Feed Slice', () => {
-  const initialState: feedState = {
-    orders: [],
-    isLoading: true,
-    error: null,
-    total: 0,
-    totalToday: 0
-  };
-
   test('Changing status to loading while pending', () => {
     const action = { type: getFeed.pending.type };
     const newState = feedReducer(initialState, action);
