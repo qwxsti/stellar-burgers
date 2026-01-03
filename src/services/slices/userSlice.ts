@@ -15,7 +15,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder, TUser } from '@utils-types';
 import { setCookie, deleteCookie } from '../../utils/cookie';
 
-interface userState {
+export interface userState {
   isAuthChecked: boolean;
   isAuthenticated: boolean;
   user: TUser | null;
@@ -39,7 +39,7 @@ export const registerUser = createAsyncThunk(
 
       if (!response.success) {
         return rejectWithValue(
-          'Произошла ошибка при регистрации пользователя: ' + response
+          'Произошла ошибка при регистрации пользователя: ' /*+ response*/
         );
       }
 
@@ -49,7 +49,7 @@ export const registerUser = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        'Произошла ошибка при регистрации пользователя: ' + error
+        'Произошла ошибка при регистрации пользователя: ' /*+ error*/
       );
     }
   }
@@ -63,7 +63,7 @@ export const loginUser = createAsyncThunk(
 
       if (!response.success) {
         return rejectWithValue(
-          'Произошла ошибка при входе пользователя: ' + response
+          'Произошла ошибка при входе пользователя: ' /*+ response*/
         );
       }
 
@@ -73,7 +73,7 @@ export const loginUser = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        'Произошла ошибка при входе пользователя: ' + error
+        'Произошла ошибка при входе пользователя: ' /*+ error*/
       );
     }
   }
@@ -84,10 +84,11 @@ export const getUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await getUserApi();
+      console.log(response);
       return response;
     } catch (error) {
       return rejectWithValue(
-        'Произошла ошибка при получении данных пользователя: ' + error
+        'Произошла ошибка при получении данных пользователя: ' /*+ error*/
       );
     }
   }
@@ -101,7 +102,7 @@ export const updateUser = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        'Произошла ошибка при обновлении данных пользователя: ' + error
+        'Произошла ошибка при обновлении данных пользователя: ' /*+ error*/
       );
     }
   }
@@ -119,7 +120,7 @@ export const logoutUser = createAsyncThunk(
       return;
     } catch (error) {
       return rejectWithValue(
-        'Произошла ошибка при выходе пользователя: ' + error
+        'Произошла ошибка при выходе пользователя: ' /*+ error*/
       );
     }
   }
@@ -133,7 +134,7 @@ export const getUserOrders = createAsyncThunk(
       return response;
     } catch (error) {
       return rejectWithValue(
-        'Произошла ошибка при получении заказов пользователя: ' + error
+        'Произошла ошибка при получении заказов пользователя: ' /*+ error*/
       );
     }
   }
@@ -146,7 +147,7 @@ export const forgotPassword = createAsyncThunk<{ success: boolean }, string>(
       const response = await forgotPasswordApi({ email });
       return response;
     } catch (error) {
-      return rejectWithValue('Произошла ошибка: ' + error);
+      return rejectWithValue('Произошла ошибка: ' /*+ error*/);
     }
   }
 );
@@ -159,7 +160,7 @@ export const resetPassword = createAsyncThunk<
     const response = await resetPasswordApi({ password, token });
     return response;
   } catch (error) {
-    return rejectWithValue('Произошла ошибка при смене пароля: ' + error);
+    return rejectWithValue('Произошла ошибка при смене пароля: ' /*+ error*/);
   }
 });
 

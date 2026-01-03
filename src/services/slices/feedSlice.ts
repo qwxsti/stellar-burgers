@@ -1,9 +1,8 @@
 import { getFeedsApi, getIngredientsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { stat } from 'fs';
 
-interface feedState {
+export interface feedState {
   orders: TOrder[];
   isLoading: boolean;
   error: string | null;
@@ -26,7 +25,9 @@ export const getFeed = createAsyncThunk(
       const data = await getFeedsApi();
       return data;
     } catch (error) {
-      return rejectWithValue('Произошла ошибка при загрузке заказов:' + error);
+      return rejectWithValue(
+        'Произошла ошибка при загрузке заказов:' /*+ error*/
+      );
     }
   }
 );
